@@ -2,7 +2,7 @@ name: ephemeral_ec2_run-this
 on: 
   workflow_call:
     inputs:
-      do-this:
+      run-this:
         required: true
         type: string
 jobs:

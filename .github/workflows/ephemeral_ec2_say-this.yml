@@ -5,6 +5,9 @@ on:
       say-this:
         required: true
         type: string
+    secrets:
+      aws-access-key:
+        required: true
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
@@ -17,7 +20,7 @@ jobs:
         uses: AllStarLink/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.aws-access-key }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
@@ -48,7 +51,7 @@ jobs:
         uses: AllStarLink/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.aws-access-key }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Stop EC2 runner
         uses: AllStarLink/ec2-github-runner@v2

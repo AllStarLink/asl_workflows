@@ -1,9 +1,10 @@
-name: ephemeral_ec2_do-this
+name: ephemeral_ec2_run-this
 on: 
   workflow_call:
     inputs:
       do-this:
         required: true
+        type: string
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
@@ -32,7 +33,9 @@ jobs:
     name: Do the job on the runner
     needs: start-runner # required to start the main job when the runner is ready
     runs-on: ${{ needs.start-runner.outputs.label }} # run the job on the newly created runner
-    steps: ${{ inputs.do-this }}
+    steps: 
+      - name: Run This
+        run: ${{ inputs.run-this }}
   stop-runner:
     name: Stop self-hosted EC2 runner
     needs:

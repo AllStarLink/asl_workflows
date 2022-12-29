@@ -5,6 +5,10 @@ on:
       run-this:
         required: true
         type: string
+      arch:
+        required: true
+        type: string
+        default: x86_64
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
@@ -25,8 +29,8 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          ec2-image-id: ami-0df70cf0bda84e746
-          ec2-instance-type: t4g.nano
+          ec2-image-id: ${{ inputs.arch == 'x86_64' && 'ami-06b6beaf868d8ec12' || inputs.arch == 'arm64' && 'ami-0df70cf0bda84e746' || null }}
+          ec2-instance-type: ${{ inputs.arch == 'x86_64' && 't3.nano' || inputs.arch == 'arm64' && 't4g.nano' || null }}
           subnet-id: subnet-342c9f78
           security-group-id: sg-09048a35be62e55d3
   do-the-job:

@@ -1,0 +1,21 @@
+
+name: publish_artifacts_to_aptly
+on: 
+  workflow_call:
+    inputs:
+      artifact-path:
+        required: false
+        type: string
+        default: ''
+jobs:
+  download-artifacts:
+    name: Download all artifacts
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          path: ${{artifact-path}}
+          if: ${{ inputs.artifact-path != '' }}
+        
+      - name: Display structure of downloaded files
+        run: ls -R
+      

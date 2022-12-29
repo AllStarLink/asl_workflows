@@ -19,7 +19,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: ${{inputs.artifact-path}}
-          if: ${{ inputs.artifact-path != '' }}
       - name: Display structure of downloaded files
         run: ls -R
       - name: Upload to aptly

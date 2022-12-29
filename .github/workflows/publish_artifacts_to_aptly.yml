@@ -7,16 +7,21 @@ on:
         required: false
         type: string
         default: ''
+      repo-name:
+        required: true
+        type: string
 jobs:
-  download-artifacts:
+  process-artifacts:
     runs-on: [self-hosted, lightsail]
-    name: Download all artifacts
+    name: Process all artifacts
     steps:
-      - uses: actions/download-artifact@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
         with:
           path: ${{inputs.artifact-path}}
           if: ${{ inputs.artifact-path != '' }}
-        
       - name: Display structure of downloaded files
         run: ls -R
+      - name: Upload to aptly
+        run: find Archive\ artifacts/ -name "*.deb" | xargs -I {} -d '\n' curl --user ${{secrets.APTLY_API_USER}}:${{secrets.APTLY_API_PASS}} -X POST -F 'file=@"{}"' https://aptly.allstarlink.org/api/files/${{input.repo-name}}-incoming
       

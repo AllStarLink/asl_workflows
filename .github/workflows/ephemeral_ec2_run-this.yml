@@ -9,6 +9,10 @@ on:
         required: false
         type: string
         default: x86_64
+      artifact-path:
+        required: false
+        type: string
+        default: ''
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
@@ -40,6 +44,12 @@ jobs:
     steps: 
       - name: Run This
         run: ${{ inputs.run-this }}
+      - name: Archive artifacts
+        if: ${{ inputs.archivepath != '' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: Archive artifacts
+          path: ${{ inputs.archive-path }}
   stop-runner:
     name: Stop self-hosted EC2 runner
     needs:

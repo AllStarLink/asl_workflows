@@ -6,7 +6,7 @@ on:
         required: true
         type: string
       arch:
-        required: true
+        required: false
         type: string
         default: x86_64
 jobs:

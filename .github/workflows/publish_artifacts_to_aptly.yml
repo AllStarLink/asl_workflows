@@ -19,9 +19,9 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{inputs.artifact-name}}
-          path: _temp/artifacts
+          path: $_RUNNER_TEMP/artifacts
       - name: Display structure of downloaded files
         run: ls -R
       - name: Upload to aptly
-        run: find _temp/artifacts/ -name "*.deb" | xargs -I {} -d '\n' curl --user ${{secrets.APTLY_API_USER}}:${{secrets.APTLY_API_PASS}} -X POST -F 'file=@"{}"' https://aptly.allstarlink.org/api/files/${{inputs.repo-name}}-incoming
+        run: find $_RUNNER_TEMP/artifacts/ -name "*.deb" | xargs -I {} -d '\n' curl --user ${{secrets.APTLY_API_USER}}:${{secrets.APTLY_API_PASS}} -X POST -F 'file=@"{}"' https://aptly.allstarlink.org/api/files/${{inputs.repo-name}}-incoming
       

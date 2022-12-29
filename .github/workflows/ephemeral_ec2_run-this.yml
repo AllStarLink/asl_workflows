@@ -45,11 +45,11 @@ jobs:
       - name: Run This
         run: ${{ inputs.run-this }}
       - name: Archive artifacts
-        if: ${{ inputs.archive-path != '' }}
+        if: ${{ inputs.artifact-path != '' }}
         uses: actions/upload-artifact@v3
         with:
           name: Archive artifacts
-          path: ${{ inputs.archive-path }}
+          path: ${{ inputs.artifact-path }}
   stop-runner:
     name: Stop self-hosted EC2 runner
     needs:

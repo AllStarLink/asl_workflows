@@ -9,6 +9,7 @@ on:
         default: ''
 jobs:
   download-artifacts:
+    runs-on: [self-hosted, lightsail]
     name: Download all artifacts
     steps:
       - uses: actions/download-artifact@v3

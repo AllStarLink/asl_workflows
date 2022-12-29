@@ -23,5 +23,5 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
       - name: Upload to aptly
-        run: find Archive\ artifacts/ -name "*.deb" | xargs -I {} -d '\n' curl --user ${{secrets.APTLY_API_USER}}:${{secrets.APTLY_API_PASS}} -X POST -F 'file=@"{}"' https://aptly.allstarlink.org/api/files/${{input.repo-name}}-incoming
+        run: find Archive\ artifacts/ -name "*.deb" | xargs -I {} -d '\n' curl --user ${{secrets.APTLY_API_USER}}:${{secrets.APTLY_API_PASS}} -X POST -F 'file=@"{}"' https://aptly.allstarlink.org/api/files/${{inputs.repo-name}}-incoming
       

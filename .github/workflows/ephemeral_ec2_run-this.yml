@@ -45,7 +45,7 @@ jobs:
       - name: Run This
         run: ${{ inputs.run-this }}
       - name: Archive artifacts
-        if: ${{ inputs.archivepath != '' }}
+        if: ${{ inputs.archive-path != '' }}
         uses: actions/upload-artifact@v3
         with:
           name: Archive artifacts

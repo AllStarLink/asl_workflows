@@ -19,7 +19,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{inputs.artifact-name}}
-          path: ${{runnter.temp}/artifacts
+          path: ${{runner.temp}}/artifacts
       - name: Display structure of downloaded files
         run: ls -R
       - name: Upload to aptly

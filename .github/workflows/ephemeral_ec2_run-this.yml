@@ -33,7 +33,7 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          ec2-image-id: ${{ inputs.arch == 'x86_64' && 'ami-06b6beaf868d8ec12' || inputs.arch == 'arm64' && 'ami-0df70cf0bda84e746' || null }}
+          ec2-image-id: ${{ inputs.arch == 'x86_64' && 'ami-0a2709d67026f5d8a' || inputs.arch == 'arm64' && 'ami-0248086962a95d221' || null }}
           ec2-instance-type: ${{ inputs.arch == 'x86_64' && 'm6a.large' || inputs.arch == 'arm64' && 'm6g.large' || null }}
           subnet-id: subnet-342c9f78
           security-group-id: sg-09048a35be62e55d3
